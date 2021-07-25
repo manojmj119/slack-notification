@@ -75,7 +75,7 @@ def notifyBuild(String buildStatus = 'STARTED', String colorCode = '#5492f7', St
 
   def project = 'slack-notification'
   def channel = "prabhu.p"
-  def base = "https://github.com/sunil-paswan/${project}/commits/"
+  def base = "https://github.com/manojmj119/slack-notification.git/${project}/commits/"
 
   def commit = sh(returnStdout: true, script: 'git log -n 1 --format="%H"').trim()
   def link = "${base}${commit}"
