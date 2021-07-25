@@ -10,12 +10,12 @@ pipeline {
          
       stage('SonarCloud_static_code_analysis') {
   environment {
-    SCANNER_HOME = tool 'Sonar'
-    ORGANIZATION = "demo1_maven_freestyle"
-    PROJECT_NAME = "demo1_maven_freestyle"
+    SCANNER_HOME = tool 'sonarqube'
+    ORGANIZATION = "slack-notification"
+    PROJECT_NAME = "slack-notification"
   }
   steps {
-    withSonarQubeEnv('Sonarqube') {
+    withSonarQubeEnv('sonarqube') {
         sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.organization=$ORGANIZATION \
         -Dsonar.java.binaries=build/classes/java/ \
         -Dsonar.projectKey=$PROJECT_NAME \
@@ -73,8 +73,8 @@ pipeline {
 
 def notifyBuild(String buildStatus = 'STARTED', String colorCode = '#5492f7', String notify = '') {
 
-  def project = 'webapp'
-  def channel = "# jenkins-alert"
+  def project = 'slack-notification'
+  def channel = "prabhu.p"
   def base = "https://github.com/sunil-paswan/${project}/commits/"
 
   def commit = sh(returnStdout: true, script: 'git log -n 1 --format="%H"').trim()
